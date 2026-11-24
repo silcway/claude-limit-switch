@@ -158,6 +158,7 @@ function Get-Providers([int]$maxAgeSec = 60) {
   }
   $res = @{ ok = $false; at = $Now; providers = @(); combo = @(); last = '' }
   $conns = Or-Api '/api/rate-limits' 15
+  if (-not $conns) { Start-Sleep 2; $conns = Or-Api '/api/rate-limits' 20 }   # first call after idle can be slow
   if ($conns) {
     $res.ok = $true
     $today = (Get-Date).Date.ToUniversalTime()
