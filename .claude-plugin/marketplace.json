@@ -1,13 +1,13 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
-  "name": "claude-limit-switch",
+  "name": "limit-pilot",
   "owner": { "name": "silcway" },
-  "metadata": { "description": "Claude Code plugin that switches from the Claude subscription to a free OmniRoute queue" },
+  "metadata": { "description": "LimitPilot — Claude subscription and free-model limits inside Claude Code, with automatic switch to a free OmniRoute queue" },
   "plugins": [
     {
-      "name": "limit-switch",
-      "source": "./limit-switch",
-      "description": "Switches Claude Code from the Claude subscription to the free OmniRoute queue at 70% usage or when the limit is hit, continuing the same conversation."
+      "name": "limit-pilot",
+      "source": "./limit-pilot",
+      "description": "Limits of the Claude subscription (with forecast) and of free OmniRoute models right in /model; switches to the free queue at your threshold or when the limit is hit, continuing the same conversation."
     }
   ]
 }
