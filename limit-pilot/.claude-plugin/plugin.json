@@ -4,6 +4,6 @@
   "description": "LimitPilot: limits of the Claude subscription (with burn-rate forecast) and of free OmniRoute models right in /model; switches to the free queue at your threshold or when the limit is hit, continuing the same conversation. Commands: /limity, /modeli, /porog, /besplatno, /limit-pilot:nastroit.",
   "author": { "name": "silcway" },
   "license": "MIT",
-  "repository": "https://github.com/silcway/claude-limit-switch",
+  "repository": "https://github.com/silcway/limit-pilot",
   "keywords": ["rate-limit", "usage", "omniroute", "fallback", "statusline", "model-picker"]
 }

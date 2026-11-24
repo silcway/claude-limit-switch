@@ -27,7 +27,7 @@
 ## Установка
 
 ```
-/plugin marketplace add silcway/claude-limit-switch
+/plugin marketplace add silcway/limit-pilot
 /plugin install limit-pilot@limit-pilot
 /limit-pilot:nastroit
 ```
