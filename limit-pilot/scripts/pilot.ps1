@@ -157,7 +157,7 @@ function Get-Providers([int]$maxAgeSec = 60) {
     return (Get-Content $OrCacheF -Raw -Encoding UTF8 | ConvertFrom-Json)
   }
   $res = @{ ok = $false; at = $Now; providers = @(); combo = @(); last = '' }
-  $conns = Or-Api '/api/rate-limits'
+  $conns = Or-Api '/api/rate-limits' 15
   if ($conns) {
     $res.ok = $true
     $today = (Get-Date).Date.ToUniversalTime()
@@ -187,6 +187,8 @@ function Get-Providers([int]$maxAgeSec = 60) {
     $cb = @($combos.combos | ? { $_.name -eq $Combo }) | Select -First 1
     if ($cb) { $res.combo = @($cb.models | % { "$($_.model)" }) }
   }
+  # cache only a good answer: a failed one must not hide the models for the next minute
+  if (-not $res.ok) { return ((Out-Json $res) | ConvertFrom-Json) }
   Out-Json $res | Set-Content $OrCacheF -Encoding UTF8
   return (Get-Content $OrCacheF -Raw -Encoding UTF8 | ConvertFrom-Json)
 }
@@ -317,6 +319,7 @@ switch ($Mode) {
   }
   'picker' {
     $pv = Get-Providers 20
+    for ($i = 0; $i -lt 3 -and -not $pv.ok; $i++) { Start-Sleep 3; $pv = Get-Providers 0 }   # OmniRoute may still be starting
     $o = @{}
     if ($pv.ok) { $o.modelPicker = @{ replaceBuiltInOptions = $true; options = @(Picker-Rows $pv) } }
     if ($Arg2 -eq 'nogodmode') { $o.enabledPlugins = @{ 'godmode@godmode' = $false } }
