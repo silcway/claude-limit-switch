@@ -1,0 +1,8 @@
+{
+  "name": "limit-switch",
+  "version": "1.0.0",
+  "description": "Switches to the free OmniRoute queue when the Claude subscription limit is 70%+ used or exhausted, continuing the same conversation. Commands: /besplatno, /limity.",
+  "author": { "name": "silcway" },
+  "license": "MIT",
+  "repository": "https://github.com/silcway/claude-limit-switch"
+}

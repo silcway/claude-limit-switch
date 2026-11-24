@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "claude-limit-switch",
+  "owner": { "name": "silcway" },
+  "metadata": { "description": "Claude Code plugin that switches from the Claude subscription to a free OmniRoute queue" },
+  "plugins": [
+    {
+      "name": "limit-switch",
+      "source": "./limit-switch",
+      "description": "Switches Claude Code from the Claude subscription to the free OmniRoute queue at 70% usage or when the limit is hit, continuing the same conversation."
+    }
+  ]
+}
