@@ -161,7 +161,7 @@ function Get-Providers([int]$maxAgeSec = 60) {
   if ($conns) {
     $res.ok = $true
     $today = (Get-Date).Date.ToUniversalTime()
-    $logs = @(); foreach ($a in (Or-Api '/api/usage/call-logs?limit=200')) { foreach ($x in $a) { if ($x.timestamp -and $x.model -ne 'connection-test' -and ([datetime]$x.timestamp).ToUniversalTime() -ge $today) { $logs += $x } } }
+    $logs = @(); foreach ($a in (Or-Api '/api/usage/call-logs?limit=200')) { foreach ($x in $a) { if ($x.timestamp -and $x.model -notin 'connection-test','model-sync' -and $x.path -like '*/v1/*' -and ([datetime]$x.timestamp).ToUniversalTime() -ge $today) { $logs += $x } } }
     if ($logs.Count) { $res.last = "$($logs[0].provider)/$($logs[0].model)" }
     foreach ($c in $conns.connections) {
       $nm = $Names[$c.provider]; if (-not $nm) { $nm = $c.provider }
